@@ -1,0 +1,37 @@
+{% extends "training_scheduling/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    {{ comments }}
+    <p style="color: red;" id="error">{{ error }}</p>
+    <p style="color: red;" id="error">{{ error1 }}</p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Project</th>
+            <th scope="col">Class Room</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for res, ele in reserved %}
+            <tr>
+                
+                <th scope="row"><a href="trainingdays/{{ res.id }}/0">{{ ele }}</a></th>
+                <td>{{ res.project }}</td>
+                <td>{{ res.class_room.room_number }}</td>
+                <td>{{ res.training_start_date }}</td>
+                <td>{{ res.training_end_date }}</td>
+            </tr> 
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ list }}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'training_scheduling/inbox.js' %}"></script>
+{% endblock %}

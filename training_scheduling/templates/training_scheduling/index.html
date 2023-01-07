@@ -1,0 +1,84 @@
+{% extends "training_scheduling/layout.html" %}
+{% load static %}
+
+{% block body %}
+    
+    <!--
+    <h2>Date Field</h2>
+
+    <p>The <strong>input type="date"</strong> is used for input fields that should contain a date.</p>
+
+    <form action="/action_page.php">
+    <label for="birthday">Birthday:</label>
+    <input type="date" id="birthday" name="birthday">
+    <input type="submit" value="Submit">
+    </form>
+
+    <p><strong>Note:</strong> type="date" is not supported in Internet Explorer 11 or prior Safari 14.1.</p>
+    -->
+
+    
+    Select Training start date <input required id="start-train" class="datepick" type="date" name="date-picker" placeholder="Enter a date">
+    Select Training end date <input required id="emd-train" class="datepick" type="date" name="date-picker" placeholder="Enter a date">
+    <button id="try-date" style="height: 26px; width: 160px;" value="try date">Try Dates</button>
+    <p style="color: red;" id="error"></p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Pick a class</th>
+            <th scope="col">Room Number</th>
+            <th scope="col">Site</th>
+            <th scope="col">Seats</th>
+            <th scope="col">Available</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        {% for class_room in Classes %}
+        <tr>
+            <th scope="row"><a href="/{{ class_room.id }}" id="class_id">{{ class_room.id }}</a></th>
+            <td>{{ class_room.room_number }}</td>
+            <td>{{ class_room.Site }}</td>
+            <td>{{ class_room.seats }}</td>
+            <td id="avail">Select Date</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <form action="{% url 'add_classroom' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        {% for class_room in Classes %}
+
+            
+        {% endfor %}
+        <!--
+        <input type="integer" id="remove_class" name="remove_class"/>
+        <input type="submit" name="remove" value="Remove">
+        -->
+
+    </form>
+    
+    <br>
+    <!--
+    {% for class_room in Classes %}
+        {{ class_room.id }}
+        {{ class_room.room_number }}
+        {{ class_room.Site }}
+        {{ class_room.seats }}
+        {{ class_room.class_available }}
+        {% for date in class_room.dates_unavailable.all %}
+            {{ date.date }}
+        {% endfor %}
+        <br>
+    
+    {% endfor %}
+    --> 
+    
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'training_scheduling/inbox.js' %}"></script>
+{% endblock %}

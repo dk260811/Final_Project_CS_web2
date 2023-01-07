@@ -1,0 +1,27 @@
+{% extends "training_scheduling/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <h2>Create Class</h2>
+    
+        <form action="{% url 'add_classroom' %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            {{ error_message }}
+            <br>
+            {% for element1, element2 in form %}
+                {{ element2 }}
+                <br>
+                {{ element1 }}
+                <br>
+            {% endfor %}
+            <br>
+            <input type="submit" name="add" value="Add">
+        </form>
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'training_scheduling/inbox.js' %}"></script>
+{% endblock %}

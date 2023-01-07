@@ -1,0 +1,67 @@
+
+
+{% extends "training_scheduling/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+    
+    Training Observation me javacript nalt mu ndrru me navigation bar training days
+
+    <ul class="nav">
+        <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+        {% for day in days %}
+        <li class="nav-item">
+            <a class="nav-link" id="{{ day.training_day_date }}">Date {{ day.training_day_date }}</a>
+        </li>
+        {% endfor %}
+        <li class="nav-item">
+            <a class="nav-link" id="overall">Overall</a>
+        </li>
+    </ul>
+
+    <table class="table">
+        <form>
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Surename</th>
+                <th scope="col">Attended</th>
+                <th scope="col">Class Room</th>
+                <th scope="col">Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            
+
+            {% for day_student in day_students %}
+                
+                <tr>
+                    <td id="{{ day_student.training_day.training_day_date }}overall">{{ day_student.student_name }}</td>
+                    <td id="{{ day_student.training_day.training_day_date }}overall">{{ day_student.student_surename }}</td>
+                    <td id="{{ day_student.training_day.training_day_date }}overall"><input type="checkbox" id="attended" /></td>
+                    <td id="{{ day_student.training_day.training_day_date }}overall">{{ day_student.training_day.training.class_room.room_number }}</td>
+                    <td id="{{ day_student.training_day.training_day_date }}overall"><input type="text" id="comment" /></td>
+                </tr>
+                
+            {% endfor %}
+            
+            </tbody>
+            <input type="submit" value="Save observation">
+        </form>
+    </table>
+
+    <form>
+        <label for="comment_all">Write a comment for the whole class:</label>
+        <input type="text" id="comment_all" name="comment_all"><br>
+    </form>
+
+    <button type="PDF">Export PDF</button>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'training_scheduling/inbox.js' %}"></script>
+{% endblock %}
+

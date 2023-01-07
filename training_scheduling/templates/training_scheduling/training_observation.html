@@ -1,0 +1,153 @@
+
+
+{% extends "training_scheduling/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+    
+    
+    
+    <ul class="nav">
+        <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+        {% for day in days %}
+        <li class="nav-item">
+            <a class="nav-link" id="{{ day.training_day_date }}">Date {{ day.training_day_date }}</a>
+        </li>
+        {% endfor %}
+        <!--
+        <li class="nav-item">
+            <a class="nav-link" id="overall">Overall</a>
+        </li>
+        -->
+    </ul>
+    
+    <!--<form action="{% url 'trainingdays' %}" method="post" style="display: inline;">-->
+        <table class="table" id="post-view">
+            <button id="edit">Edit Observation</button>
+            {% csrf_token %}
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surename</th>
+                <th scope="col">Class Room</th>
+                <th scope="col">Attended</th>
+                <th scope="col">Arrival Time</th>
+                <th scope="col">Left Time</th>
+                <th scope="col">Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            
+            <!--
+            {% for day_student in day_students %}
+                
+                <tr>
+                    <td id="training_date">{{ day_student.training_day.training_day_date }}</td>
+                    <td id="student_name">{{ day_student.student_name }}</td>
+                    <td id="student_surename">{{ day_student.student_surename }}</td>
+                    <td id="training_room">{{ day_student.training_day.training.class_room.room_number }}</td>
+                    
+                    {% for element in form_obs %}
+                        <td> {{ element }} </td>
+                    {% endfor %} 
+                </tr>
+                
+            {% endfor %} 
+            -->
+            
+            {% for day_student in day_students %}
+
+               
+                <tr id="post-view1">
+                    <td id="post-view1">{{ day_student.training_day.training_day_date }}</td>
+                    <td id="post-view1">{{ day_student.student_name }}</td>
+                    <td id="post-view1">{{ day_student.student_surename }}</td>
+                    <td id="post-view1">{{ day_student.training_day.training.class_room.room_number }}</td>
+                    <td id="post-view1">{{ day_student.training_day_attendance }}</td>
+                    <td id="post-view1">{{ day_student.training_day_arrival }}</td>
+                    <td id="post-view1">{{ day_student.training_day_left }}</td>
+                    <td id="post-view1">{{ day_student.training_day_comment }}</td>
+                </tr>
+            
+            {% endfor %}
+            
+            </tbody>
+            
+            
+        </table>
+
+        <table class="table" id="edit-view">
+            <button id="show">Save Observation</button>
+            {% csrf_token %}
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surename</th>
+                <th scope="col">Class Room</th>
+                <th scope="col">Attended</th>
+                <th scope="col">Arrival Time</th>
+                <th scope="col">Left Time</th>
+                <th scope="col">Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            
+            {% for day_student in day_students %}
+                
+                <tr id="edit-view1">
+                    <td id="edit-view1">{{ day_student.training_day.training_day_date }}</td>
+                    <td id="edit-view1">{{ day_student.student_name }}</td>
+                    <td id="edit-view1">{{ day_student.student_surename }}</td>
+                    <td id="edit-view1">{{ day_student.training_day.training.class_room.room_number }}</td>
+                    
+                    <td hidden id="studentID">{{ day_student.id }}</td>
+                    <td id="attented"><input id="input" type="checkbox" checked="false"></td>
+                    
+                    <td id="arrive"><input id="input" type="time"></td>
+                    <td id="left"><input id="input" type="time"></td>
+                    <td id="commentTEST"><input id="input" type="text" value="{{ day_student.training_day_comment }}"></td>
+                   
+                    <!--
+                    {% for element in form_obs %}
+                        <td id="testID"> {{ element }} </td>
+                    {% endfor %}
+                    -->
+                </tr>
+            
+
+            {% endfor %} 
+            
+            
+            </tbody>
+            
+            
+        </table>
+        
+        <!--<input type="hidden" name="studentID1" value="{{ day_students }}">
+        
+        
+        
+    </form>-->
+    <!--
+    <button id="PDF">Export PDF</button>
+-->
+
+    <form action="/trainingdays/{{page}}/0" method="post" style="display: inline;">
+        {% csrf_token %} 
+        
+        <input type="submit" name="remove" value="Remove Reservation">
+    </form>
+    
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'training_scheduling/inbox.js' %}"></script>
+{% endblock %}
+
