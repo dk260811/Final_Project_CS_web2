@@ -6,6 +6,8 @@ I got the Idea from the company I work in, sometimes trainers and managers have 
 ## Distinctiveness and Complexity
 
 I believe that the complexity of my project is sufficient. I did now copy any of the other projects that we did in this course or any prior project done by other students.
+This project is completely different from the social network project 4 because that project utilizes only one Django URL page and everything else is done with JavaScript, it shows posts that you can edit and delete, my project is used to reserve training classes and rooms, it uses more models, more URLs and Views.
+This project is completely different from the e-commerce project 2 because that project is a marketplace to sell and buy stuff online, my project is used to reserve training classes and rooms it uses different models, views, URLs and more complex JavaScript code.
 Not only that, but I have used Django and have created 5 models that utilize foreign keys and many to many fields, my application uses 12 URLs and 10 views. I use 6 JavaScript functions that utilize fetch methods with get and post.
 
 ## Created Files
